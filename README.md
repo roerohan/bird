@@ -59,11 +59,19 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-To build a binary from source, you need the go runtime. Otherwise, you can just get the binary from the GitHub release.
+To build a binary from source, you need the go runtime. Otherwise, you can just get the binary from the [GitHub release](https://github.com/roerohan/bird/releases/).
 * golang
 
 
 ### Installation
+
+You can get the binary for your Operating System directly using `wget`, or download it from the [GitHub releases](https://github.com/roerohan/bird/releases/).
+
+```
+wget https://github.com/roerohan/bird/releases/download/v0.1.2/bird
+```
+
+If you want to get it using the `go` CLI, follow the steps below.
 
 1. Get the package using `go get`.
 ```sh
@@ -114,7 +122,7 @@ bird -u https://github.com -w ./wordlist/common.txt -s 200 -s 302
 
 2. To enumerate `https://github.com` and `https://csivit.com` with success code 200, 302. These sites will be enumerated in parallel.
 ```sh
-bird -u https://github.com -u https://csivit.com -w ./wordlist/common.txt -s 200 -s 302
+bird -u https://github.com -u https://csivit.com -w ./rockyou.txt -s 200 -s 302
 ```
 
 3. The default status code is `200`, so it is not necessary to pass the flag `-s`.
