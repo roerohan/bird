@@ -29,7 +29,7 @@ func (b *Brute) FormURL() string {
 }
 
 // Try tries to visit a Brute URL and checks the status code
-func (b *Brute) Try(success map[string]bool, logs chan logger.Log) {
+func (b *Brute) Try(success map[string]bool) {
 	url := b.FormURL()
 
 	resp, err := http.Get(url)
@@ -40,9 +40,6 @@ func (b *Brute) Try(success map[string]bool, logs chan logger.Log) {
 	statusCode := strconv.Itoa(resp.StatusCode)
 
 	if success[statusCode] {
-		logs <- logger.Log{
-			Message: fmt.Sprintf("%s [Status code %s]", url, statusCode),
-			Func:    logger.Info,
-		}
+		logger.Info(fmt.Sprintf("%s [Status code %s]", url, statusCode))
 	}
 }
