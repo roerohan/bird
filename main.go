@@ -63,7 +63,7 @@ func main() {
 	stat, _ := file.Stat()
 	size := stat.Size()
 
-	bar.New(0, size)
+	bar.New(0, int(size))
 
 	count := 0
 
@@ -78,7 +78,7 @@ func main() {
 
 		count += len(text) + 1
 		logs <- logger.Log{
-			Message: bar.Play(int64(count)),
+			Message: bar.Play(count),
 			Func:    logger.Print,
 		}
 	}
