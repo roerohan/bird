@@ -29,9 +29,9 @@ func main() {
 	}
 
 	workers := 4
+	logger.Info("Starting 4 worker threads...")
 
 	successCodes := make(map[string]bool)
-
 	for _, code := range success {
 		successCodes[code] = true
 	}
