@@ -46,6 +46,11 @@
 
 `bird` is a simple, multithreaded website directory enumeration tool. `bird` takes a list of URLs, a list of status codes which represent that the enumeration was successful, and a wordlist for fuzzing. Then, it can _parallely_ enumerate routes on all the URLs with words from the wordlist provided and report the route which returned one of the success codes.
 
+<p align="center">
+<img src="./assets/images/bird.png" width="500">
+</p>
+
+
 ### Built With
 
 * [Golang](https://golang.org/)
