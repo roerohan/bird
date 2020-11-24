@@ -30,14 +30,14 @@ func (bar *Progress) getPercent() int64 {
 }
 
 // Play increments the progress bar
-func (bar *Progress) Play(cur int64) {
+func (bar *Progress) Play(cur int64) string {
 	bar.cur = cur
 	last := bar.percent
 	bar.percent = bar.getPercent()
 	if bar.percent != last && bar.percent%2 == 0 {
 		bar.rate += bar.graph
 	}
-	fmt.Printf("\r[%-50s]%3d%%", bar.rate, bar.percent)
+	return fmt.Sprintf("\r[%-50s]%3d%%", bar.rate, bar.percent)
 }
 
 // Finish ends printing the bar graph
