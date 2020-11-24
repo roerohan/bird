@@ -38,7 +38,7 @@ func main() {
 
 	var wg sync.WaitGroup
 	var bar progress.Progress
-	c := make(chan *brutus.Brute, workers)
+	c := make(chan *brutus.Brute)
 
 	for i := 0; i < workers; i++ {
 		wg.Add(1)
