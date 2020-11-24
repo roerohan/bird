@@ -3,23 +3,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <!-- <a href="https://github.com/roerohan/Template">
+  <!-- <a href="https://github.com/roerohan/bird">
     <img src="https://project-logo.png" alt="Logo" width="80">
   </a> -->
 
-  <h3 align="center">YOUR_TITLE</h3>
+  <h1 align="center">bird</h1>
 
   <p align="center">
-    YOUR_SHORT_DESCRIPTION
+    A simple website directory enumeration tool built with `golang`.
     <br />
-    <a href="https://github.com/roerohan/Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/roerohan/bird"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/roerohan/Template">View Demo</a>
+    <a href="https://github.com/roerohan/bird">View Demo</a>
     ·
-    <a href="https://github.com/roerohan/Template/issues">Report Bug</a>
+    <a href="https://github.com/roerohan/bird/issues">Report Bug</a>
     ·
-    <a href="https://github.com/roerohan/Template/issues">Request Feature</a>
+    <a href="https://github.com/roerohan/bird/issues">Request Feature</a>
   </p>
 </p>
 
@@ -44,18 +44,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`roerohan`, `repo`
-
+`bird` is a simple, multithreaded website directory enumeration tool. `bird` takes a list of URLs, a list of status codes which represent that the enumeration was successful, and a wordlist for fuzzing. Then, it can _parallely_ enumerate routes on all the URLs with words from the wordlist provided and report the route which returned one of the success codes.
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Golang](https://golang.org/)
 
 
 
@@ -66,21 +59,31 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
-```
+To build a binary from source, you need the go runtime. Otherwise, you can just get the binary from the GitHub release.
+* golang
+
 
 ### Installation
- 
+
+1. Get the package using `go get`.
+```sh
+go get github.com/roerohan/bird
+```
+
+Alternatively, you can clone the repository and build it from source.
+
 1. Clone the Repo
 ```sh
-git clone https://github.com/roerohan/Template.git
+git clone https://github.com/roerohan/bird.git
 ```
 2. Install NPM packages
 ```sh
-npm install
+cd bird
+go build -o ./bin/bird
+```
+3. Use the binary inside the bin folder.
+```sh
+./bin/bird -u https://github.com -s 200 -w ./wordlist/common.txt
 ```
 
 
@@ -88,16 +91,42 @@ npm install
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+```
+Usage of bird:
+  -s value
+        Status code for success, default 200
+  -u value
+        Target URL to be bruteforced [required]
+  -w string
+        Path to wordlist [required]
+```
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+A sample wordlist is provided [here](./wordlist/comon.txt).
 
+An advantage of using `bird` is that you can fuzz multiple websites in parallel, as you can see in the second example below.
+
+### Examples
+
+1. To enumerate `https://github.com` with success codes 200, 302.
+```sh
+bird -u https://github.com -w ./wordlist/common.txt -s 200 -s 302
+```
+
+2. To enumerate `https://github.com` and `https://csivit.com` with success code 200, 302. These sites will be enumerated in parallel.
+```sh
+bird -u https://github.com -u https://csivit.com -w ./wordlist/common.txt -s 200 -s 302
+```
+
+3. The default status code is `200`, so it is not necessary to pass the flag `-s`.
+```sh
+bird -u https://github.com -w ./wordlist/common.txt
+```
 
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/roerohan/Template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/roerohan/bird/issues) for a list of proposed features (and known issues).
 
 
 
@@ -125,5 +154,5 @@ Distributed under the MIT License. See [`LICENSE`](./LICENSE) for more informati
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [roerohan-url]: https://roerohan.github.io
-[issues-shield]: https://img.shields.io/github/issues/roerohan/Template.svg?style=flat-square
-[issues-url]: https://github.com/roerohan/Template/issues
+[issues-shield]: https://img.shields.io/github/issues/roerohan/bird.svg?style=flat-square
+[issues-url]: https://github.com/roerohan/bird/issues
