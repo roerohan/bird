@@ -73,7 +73,7 @@ To build a binary from source, you need the go runtime. Otherwise, you can just 
 You can get the binary for your Operating System directly using `wget`, or download it from the [GitHub releases](https://github.com/roerohan/bird/releases/).
 
 ```
-wget https://github.com/roerohan/bird/releases/download/v0.1.3/bird
+wget https://github.com/roerohan/bird/releases/download/v0.1.4/bird
 ```
 
 If you want to get it using the `go` CLI, follow the steps below.
