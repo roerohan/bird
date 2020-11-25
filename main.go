@@ -39,13 +39,16 @@ func main() {
 	var wg sync.WaitGroup
 	var bar progress.Progress
 	c := make(chan *brutus.Brute)
+	logs := make(chan logger.Log)
+
+	go logger.Start(logs)
 
 	for i := 0; i < workers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			for b := range c {
-				b.Try(successCodes)
+				b.Try(successCodes, logs)
 			}
 		}()
 	}
@@ -74,7 +77,7 @@ func main() {
 		}
 
 		count += len(text) + 1
-		bar.Play(count)
+		bar.Play(count, logs)
 	}
 
 	close(c)

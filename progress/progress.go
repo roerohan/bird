@@ -1,6 +1,10 @@
 package progress
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/roerohan/bird/logger"
+)
 
 // Progress is a struct to describe
 // the progress bar
@@ -27,14 +31,17 @@ func (bar *Progress) getPercent() int {
 }
 
 // Play increments the progress bar
-func (bar *Progress) Play(cur int) {
+func (bar *Progress) Play(cur int, logs chan logger.Log) {
 	bar.cur = cur
 	bar.rate = ""
 	bar.percent = bar.getPercent()
-	for i := 0; i < bar.percent; i+=2 {
+	for i := 0; i < bar.percent; i += 2 {
 		bar.rate += bar.graph
 	}
-	fmt.Printf("\r[%-50s]%3d%%", bar.rate, bar.percent)
+	logs <- logger.Log{
+		Message: fmt.Sprintf("\r[%-50s]%3d%%", bar.rate, bar.percent),
+		Func:    logger.Print,
+	}
 }
 
 // Finish ends printing the bar graph
